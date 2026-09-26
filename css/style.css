@@ -126,6 +126,14 @@ button, input, textarea, select {
   padding: 3rem 0;
 }
 
+.section-compact {
+  padding: 3.5rem 0;
+}
+
+.section-compact .section-header {
+  margin-bottom: 2rem;
+}
+
 .section-lg {
   padding: 6.5rem 0;
 }
@@ -537,6 +545,23 @@ button, input, textarea, select {
   overflow: hidden;
 }
 
+.hero-compact {
+  padding: 4.25rem 0 4.5rem;
+}
+
+.hero-compact .hero-image-card img {
+  height: 400px;
+}
+
+.hero-compact .hero-actions {
+  margin-bottom: 2rem;
+}
+
+.hero-compact .hero-lead {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
 .hero::before {
   content: '';
   position: absolute;
@@ -869,6 +894,109 @@ button, input, textarea, select {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+}
+
+/* Compact Image-Led Pillar Cards */
+.pillar-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+}
+
+.pillar-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-blue);
+}
+
+.pillar-thumb {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+}
+
+.pillar-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.pillar-card:hover .pillar-thumb img {
+  transform: scale(1.06);
+}
+
+.pillar-tag {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  background: rgba(14, 39, 76, 0.85);
+  backdrop-filter: blur(6px);
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.pillar-body {
+  padding: 1.25rem 1.15rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.pillar-title {
+  font-size: 1.1rem;
+  margin-bottom: 0.35rem;
+  color: var(--primary-navy);
+}
+
+.pillar-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+/* Image Card in About / Intro */
+.story-image-card {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--border-light);
+}
+
+.story-image-card img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+.story-image-badge {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  background: rgba(14, 39, 76, 0.88);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  padding: 0.55rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 /* Theory of Change (ToC) Visual Component */
@@ -1781,6 +1909,9 @@ body.highlight-placeholders [data-placeholder="true"] {
   .hero-image-card img {
     height: 400px;
   }
+  .hero-compact .hero-image-card img {
+    height: 340px;
+  }
   .grid-4, .impact-grid, .partners-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1795,14 +1926,23 @@ body.highlight-placeholders [data-placeholder="true"] {
     transform: rotate(90deg);
     padding: 0.5rem 0;
   }
+  .story-image-card img {
+    height: 300px;
+  }
 }
 
 @media (max-width: 768px) {
   .section {
-    padding: 3.5rem 0;
+    padding: 3rem 0;
+  }
+  .section-compact {
+    padding: 2.5rem 0;
+  }
+  .section-compact .section-header {
+    margin-bottom: 1.5rem;
   }
   .section-title {
-    font-size: 1.85rem;
+    font-size: 1.75rem;
   }
   .nav-menu, .nav-actions .btn {
     display: none;
@@ -1813,7 +1953,7 @@ body.highlight-placeholders [data-placeholder="true"] {
   .top-bar-right {
     display: none;
   }
-  .grid-3, .grid-2, .values-grid {
+  .grid-3, .grid-2, .values-grid, .grid-4 {
     grid-template-columns: 1fr;
   }
   .form-grid {
@@ -1822,7 +1962,7 @@ body.highlight-placeholders [data-placeholder="true"] {
   .cta-grid {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 2rem;
+    gap: 1.5rem;
   }
   .cta-buttons {
     justify-content: center;
@@ -1831,6 +1971,9 @@ body.highlight-placeholders [data-placeholder="true"] {
     position: static;
     margin-top: 1rem;
     max-width: 100%;
+  }
+  .hero-compact {
+    padding: 3rem 0 3.25rem;
   }
   .footer-top {
     grid-template-columns: 1fr;
@@ -1845,5 +1988,11 @@ body.highlight-placeholders [data-placeholder="true"] {
     right: 1rem;
     bottom: 0.75rem;
     justify-content: space-between;
+  }
+  .story-image-card img {
+    height: 240px;
+  }
+  .pillar-thumb {
+    height: 160px;
   }
 }
