@@ -274,33 +274,26 @@ function initScrollReveal() {
  * ------------------------------------------------------------- */
 function initHeroVideo() {
   const video = document.getElementById('heroVideo');
-  const toggleBtn = document.getElementById('heroVideoToggle');
-  if (!video || !toggleBtn) return;
+  if (!video) return;
 
-  const pauseIcon = toggleBtn.querySelector('.pause-icon');
-  const playIcon = toggleBtn.querySelector('.play-icon');
+  // Apply slow-motion cinematic effect (0.5x speed)
+  video.playbackRate = 0.5;
 
-  // Check prefers-reduced-motion
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) {
-    video.pause();
-    if (pauseIcon) pauseIcon.style.display = 'none';
-    if (playIcon) playIcon.style.display = 'block';
-    toggleBtn.setAttribute('aria-label', 'Play background video');
-  }
-
-  toggleBtn.addEventListener('click', () => {
-    if (video.paused) {
+  // Ensure autoplay on load (handles browser policies)
+  video.play().catch(() => {
+    // Autoplay blocked — try again on first user interaction
+    const tryPlay = () => {
       video.play().catch(() => {});
-      if (pauseIcon) pauseIcon.style.display = 'block';
-      if (playIcon) playIcon.style.display = 'none';
-      toggleBtn.setAttribute('aria-label', 'Pause background video');
-    } else {
-      video.pause();
-      if (pauseIcon) pauseIcon.style.display = 'none';
-      if (playIcon) playIcon.style.display = 'block';
-      toggleBtn.setAttribute('aria-label', 'Play background video');
-    }
+      document.removeEventListener('click', tryPlay);
+      document.removeEventListener('touchstart', tryPlay);
+    };
+    document.addEventListener('click', tryPlay, { once: true });
+    document.addEventListener('touchstart', tryPlay, { once: true });
+  });
+
+  // Maintain slow-motion after any browser-side pause/resume
+  video.addEventListener('play', () => {
+    video.playbackRate = 0.5;
   });
 }
 

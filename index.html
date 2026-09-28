@@ -103,9 +103,10 @@
 
   <!-- Cinematic Hero Section with Licensed Background Video -->
   <section class="hero hero-cinematic" id="hero">
-    <!-- Seamless Background Video -->
+    <!-- Seamless Background Video (autoplay, muted, looping, slow-motion) -->
     <div class="hero-video-wrapper" aria-hidden="true">
       <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto" poster="assets/images/kenya-maasai-landscape.jpg">
+        <source src="https://videos.pexels.com/video-files/5063831/5063831-uhd_3840_2160_25fps.mp4" type="video/mp4">
         <source src="assets/videos/narok-landscape-loop.webm" type="video/webm">
       </video>
       <div class="hero-video-overlay"></div>
@@ -141,18 +142,6 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- Video Play/Pause & Media Indicator Control -->
-    <div class="hero-controls-bar">
-      <div class="hero-media-tag">
-        <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
-        <span>Cinematic View &bull; Narok Landscape</span>
-      </div>
-      <button class="hero-video-toggle" id="heroVideoToggle" aria-label="Pause background video" title="Pause or play background video">
-        <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-        <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor" width="16" height="16" style="display:none;"><path d="M8 5v14l11-7z"/></svg>
-      </button>
     </div>
 
     <!-- Subtle Scroll Cue -->
