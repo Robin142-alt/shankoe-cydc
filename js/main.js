@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initForms();
   initToCInteractive();
   setActiveNavLink();
+  initScrollReveal();
 });
 
 /* -------------------------------------------------------------
@@ -238,4 +239,30 @@ function showToast(title, message) {
   setTimeout(() => {
     toast.classList.remove('show');
   }, 4500);
+}
+
+/* -------------------------------------------------------------
+ * 9. Scroll Reveal Animation Engine
+ * ------------------------------------------------------------- */
+function initScrollReveal() {
+  const revealElements = document.querySelectorAll('.reveal');
+  if (!revealElements.length) return;
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -30px 0px'
+    });
+
+    revealElements.forEach(el => observer.observe(el));
+  } else {
+    revealElements.forEach(el => el.classList.add('revealed'));
+  }
 }
