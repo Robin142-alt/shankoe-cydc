@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initToCInteractive();
   setActiveNavLink();
   initScrollReveal();
+  initHeroVideo();
+  initHeroParallax();
 });
 
 /* -------------------------------------------------------------
@@ -265,4 +267,62 @@ function initScrollReveal() {
   } else {
     revealElements.forEach(el => el.classList.add('revealed'));
   }
+}
+
+/* -------------------------------------------------------------
+ * 10. Hero Cinematic Video Controls & Subtle Parallax
+ * ------------------------------------------------------------- */
+function initHeroVideo() {
+  const video = document.getElementById('heroVideo');
+  const toggleBtn = document.getElementById('heroVideoToggle');
+  if (!video || !toggleBtn) return;
+
+  const pauseIcon = toggleBtn.querySelector('.pause-icon');
+  const playIcon = toggleBtn.querySelector('.play-icon');
+
+  // Check prefers-reduced-motion
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) {
+    video.pause();
+    if (pauseIcon) pauseIcon.style.display = 'none';
+    if (playIcon) playIcon.style.display = 'block';
+    toggleBtn.setAttribute('aria-label', 'Play background video');
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    if (video.paused) {
+      video.play().catch(() => {});
+      if (pauseIcon) pauseIcon.style.display = 'block';
+      if (playIcon) playIcon.style.display = 'none';
+      toggleBtn.setAttribute('aria-label', 'Pause background video');
+    } else {
+      video.pause();
+      if (pauseIcon) pauseIcon.style.display = 'none';
+      if (playIcon) playIcon.style.display = 'block';
+      toggleBtn.setAttribute('aria-label', 'Play background video');
+    }
+  });
+}
+
+function initHeroParallax() {
+  const video = document.querySelector('.hero-video');
+  const hero = document.querySelector('.hero-cinematic');
+  if (!video || !hero) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const scrolled = window.scrollY;
+        const heroHeight = hero.offsetHeight;
+        if (scrolled <= heroHeight) {
+          video.style.transform = `scale(1.04) translateY(${scrolled * 0.18}px)`;
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
 }
